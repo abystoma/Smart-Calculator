@@ -15,15 +15,13 @@ while True:
         print("The program calculates the sum of numbers")
     elif user_input == '':
         continue
-    elif user_input.startswith("/"):
-        print("Unknown command")
     else:
         elements = user_input.split()
         try:
             sum = int(elements[0])
             sign = "1"
             for element in range(1, len(elements)):
-                check = check_element(elements[element])
+                check = check_element(element)
                 if type(check) == int:
                     sum += int(sign) * check
                 else:
