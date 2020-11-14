@@ -1,3 +1,7 @@
+# http://www.cs.nthu.edu.tw/~wkhon/ds/ds10/tutorial/tutorial2.pdf
+# https://youtu.be/vXPL6UavUeA
+# https://youtu.be/QCnANUfgC-w
+
 import string
 import collections
 
@@ -35,7 +39,6 @@ def parse_assignment(user_input):
 
 def parse_expression(infix):
 
-
     postfix_list = infix_to_postfix(infix)
     if postfix_list == "Error":
         return "Invalid expression"
@@ -50,7 +53,6 @@ def infix_to_postfix(infix):
     i = 0
 
     while i < len(infix):
-
 
         # Check for integer or variable
         if i < len(infix) and (infix[i] in string.digits or infix[i] in string.ascii_letters):
@@ -105,7 +107,7 @@ def infix_to_postfix(infix):
                     stack.append("+")
             # Resolve multiplication or division operator
             elif infix[i] in "*/":
-                if i < len(infix) -1 and infix[i + 1] == infix[i]:
+                if i < len(infix) - 1 and infix[i + 1] == infix[i]:
                     return "Error"
                 while stack and stack[-1] in "*/^":
                     result.append(stack.pop())
@@ -178,14 +180,14 @@ def postfix_to_result(postfix_list):
 
 
 variables = {}  # dictionary to hold variables
-line = ""
-while line != "/exit":
-    line = "".join(input().split())  # remove all whitespace from expression
-    if line:
-        if line.startswith("/"):
-            parse_command(line)
-        elif "=" in line:
-            parse_assignment(line)
+while True:
+    # remove all whitespace from expression
+    user_input = "".join(input().split())
+    if user_input:
+        if user_input.startswith("/"):
+            parse_command(user_input)
+        elif "=" in user_input:
+            parse_assignment(user_input)
         else:
-            result = parse_expression(line)
+            result = parse_expression(user_input)
             print(result, end="\n")
